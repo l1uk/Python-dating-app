@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>Dating app.classes.utils API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Generic purpose utilities" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,14 +22,16 @@
 <h1 class="title">Module <code>Dating app.classes.utils</code></h1>
 </header>
 <section id="section-intro">
+<p>Generic purpose utilities</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Utils(object):
-    # simple method to collect an input between a given threshold
+<pre><code class="python">&#39;&#39;&#39;Generic purpose utilities&#39;&#39;&#39;
+class Utils(object):
     @staticmethod
     def integerInput(min, max):
+        &#39;&#39;&#39;simple method to collect an input between a given threshold&#39;&#39;&#39;
         choice = -1
         while(choice &lt; min or choice &gt; max):
             try:
@@ -60,9 +62,9 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Utils(object):
-    # simple method to collect an input between a given threshold
     @staticmethod
     def integerInput(min, max):
+        &#39;&#39;&#39;simple method to collect an input between a given threshold&#39;&#39;&#39;
         choice = -1
         while(choice &lt; min or choice &gt; max):
             try:
@@ -79,13 +81,14 @@
 <span>def <span class="ident">integerInput</span></span>(<span>min, max)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>simple method to collect an input between a given threshold</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
 def integerInput(min, max):
+    &#39;&#39;&#39;simple method to collect an input between a given threshold&#39;&#39;&#39;
     choice = -1
     while(choice &lt; min or choice &gt; max):
         try:

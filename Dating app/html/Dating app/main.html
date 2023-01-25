@@ -68,6 +68,9 @@ def load():
 def printMenu():
     &#39;&#39;&#39;simple method to print the User menu&#39;&#39;&#39;
     print(&#34;MAIN MENU:&#34;)
+    print(&#34; Statistics: &#34;)
+    print(&#34;     # of users: &#34; + str(len(Person.persons)))
+    print(&#34;     # of questions: &#34; + str(len(Question.questions)))
     print(&#34;\n&#34;.join([&#34;{:&gt;3}. {}&#34;.format(i.value, i.name) for i in MainMenuItem]))
 
 
@@ -186,6 +189,9 @@ if __name__ == &#34;__main__&#34;:
 <pre><code class="python">def printMenu():
     &#39;&#39;&#39;simple method to print the User menu&#39;&#39;&#39;
     print(&#34;MAIN MENU:&#34;)
+    print(&#34; Statistics: &#34;)
+    print(&#34;     # of users: &#34; + str(len(Person.persons)))
+    print(&#34;     # of questions: &#34; + str(len(Question.questions)))
     print(&#34;\n&#34;.join([&#34;{:&gt;3}. {}&#34;.format(i.value, i.name) for i in MainMenuItem]))</code></pre>
 </details>
 </dd>

@@ -1,12 +1,15 @@
+'''Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. '''
 from classes.question import Question
 from classes.person import Person
 from classes.answer import Answer
 
 class MatchMaker(object):
-    # return the single best match for a given person, 
-    # excluding the ones specified in the exclude list 
+    '''Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. '''
+
     @staticmethod
     def findBestMatch(person_id, exclude = None):
+        '''Return the single best match for a given person, 
+     excluding the ones specified in the exclude list. '''
         answVal = Answer.getTotalForPerson(person_id)
         minDiff = None
         personID = -1
@@ -19,11 +22,12 @@ class MatchMaker(object):
                     personID = key
         return personID
 
-    # using the precedent method, match all the participant 
-    # returns a list of matches and a boolean 
-    # indicating whether all the participans are matched or not
     @staticmethod
     def matchAll():
+        ''' Using the precedent method, match all the participant 
+     returns a list of matches and a boolean 
+     indicating whether all the participans are matched or not. 
+     Note: the implemented algorithm starts by finding the best match for the first person and goes on. It is not granted to return the best possible pairing.'''
         matched = []
         matches = []
         for key, value in Person.persons.items():

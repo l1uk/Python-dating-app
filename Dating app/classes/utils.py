@@ -1,7 +1,8 @@
+'''Generic purpose utilities'''
 class Utils(object):
-    # simple method to collect an input between a given threshold
     @staticmethod
     def integerInput(min, max):
+        '''simple method to collect an input between a given threshold'''
         choice = -1
         while(choice < min or choice > max):
             try:
