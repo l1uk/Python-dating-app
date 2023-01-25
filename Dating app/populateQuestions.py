@@ -1,31 +1,33 @@
-from datingApp.package.question import Question
-from datingApp.package.person import Person
-from datingApp.package.answer import Answer
+'''
+Script allowing a developer to store questions in the data file.
+'''
+
+from classes.question import Question
+from classes.person import Person
+from classes.answer import Answer
 import pickle
 
 filename = "data.dat"
 def dump():
-    # combine all data to one object
+    '''save all data into file data.dat'''
     data = {"persons" : Person.persons, "questions" : Question.questions, "answers" : Answer.answers}
     with open(filename,"wb") as file:
         pickle.dump(data, file, protocol=pickle.DEFAULT_PROTOCOL)
 
 def load():
-    # read data file into object
+    ''' load all data from file data.dat '''
     try:
         with open(filename,"rb") as file:
             data = pickle.load(file)
             Question.questions = data["questions"]
             Answer.answers = data["answers"]
-            Person.persons = data["persons"]    
-    except OSError as e:
-        print(f"{type(e)}: {e}")
+            Person.persons  = data["persons"]    
+    except FileNotFoundError as e:
+        pass
 
-
-if __name__=="__main__":
-    load()
+def createQuestions(): 
+    ''' reset old questions and define new questions '''
     Question.questions={}
-    """
     Question("Would you consider your values to be traditional or progressive?")
 
     Question("Are you a spontaneous person or a planner?")
@@ -38,17 +40,12 @@ if __name__=="__main__":
 
     Question("Would you like to be famous?")
 
-    Question("How would you best describe your character? (Shy or Expressive)")
+    Question("How would you best describe your character? (Shy to Expressive)")
 
     Question("Would you date someone from a different cultural background?")
 
     Question("Do you prefer the people in your life to be simple or complex?")
-
-    Question("Would you prefer to swim with sharks or go sky diving?")
-
-    Question("Are you interested in fashion?")
-
-    Question("Are you vegan or vegetarian?")"""
-
-    Question("Do you have a university degree or are you currently studying to have one?")
+if __name__=="__main__":
+    load()
+    createQuestions()
     dump()

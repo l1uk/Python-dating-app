@@ -1,8 +1,13 @@
+'''
+Answer class, related to its originatory question and to the user who answered it 
+'''
+from classes.question import Question
 class Answer(object):
     answers={}
     def __init__(self, value, personId, questionId, Id = None):
             '''
-            Constructor
+            In the constructor, the attributes value, personId, questionId are statically assigned
+             and the answer Id is generated in case the parameter is not supplied, otherwise is checked for duplicates and assigned
             '''
             if Id is None:
                 if len(Answer.answers) > 0:
@@ -18,13 +23,19 @@ class Answer(object):
             Answer.answers[self.Id] = self
     pass
     def getValue(self):
-        return int(self.value) 
+        '''return the numeric value of the answer, according to the weight of the question'''
+        return int(self.value) * int(Question.getWeight(self.questionId))
+
     @staticmethod 
     def createAnswerForPerson(answers, personID):
+        '''     given a list of answers values and questions IDs as well as the ID of the person replying,
+     create and store Answers objects'''
         for ans in answers:
             Answer(ans[1],personID,ans[0])
+    
     @staticmethod 
     def getAnswersForPerson(personID):
+        '''returns all the answers for a given person '''
         result = []
         for key, value in Answer.answers.items():
             if value.personId == personID:
@@ -32,6 +43,7 @@ class Answer(object):
         return result
     @staticmethod 
     def getTotalForPerson(personID):
+        '''return the total value of all the questions for a given person'''
         result = 0
         for key, value in Answer.answers.items():
             if value.personId == personID:
@@ -42,4 +54,5 @@ class Answer(object):
 if __name__ == "__main__":
     print('__file__={0:<35} | __name__={1:<20} | __package__={2:<20}'.format(__file__,__name__,str(__package__)))
     p1 = Answer(10, 1000, 1000)
+    p1.getValue()
     print(p1)

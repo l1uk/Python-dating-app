@@ -1,5 +1,6 @@
 class Person(object):
     persons={}
+    genders = {"M" : "male", "F" : "female", "D" : "diverse"}
     def __init__(self, name, gender, Id = None):
             '''
             Constructor
@@ -8,6 +9,8 @@ class Person(object):
                 Id=Person.getLastID()
             elif Id in Person.persons:
                     raise KeyError("Duplicate ID")
+            if gender not in Person.genders:
+                raise ValueError("invalid gender")
             self.name=name
             self.gender=gender
             self.Id=Id
@@ -15,6 +18,8 @@ class Person(object):
     pass
     def getId(self):
         return int(self.Id)
+    def getGender(self):
+        return str(self.gender)
     def __str__(self):
         '''
         str() to string method 
@@ -24,7 +29,9 @@ class Person(object):
     @staticmethod
     def createNewPerson():
         name = str(input("Please insert name: "))
-        gender = str(input("please insert gender: "))
+        gender = "l"
+        while gender not in Person.genders:
+            gender = str(input("please insert gender: "))
         Id = Person.getLastID()
         Person(name,gender, Id)
         return Id
@@ -43,7 +50,7 @@ class Person(object):
             print(value)
     @classmethod
     def get(cls, num):
-        return cls.persons[num]
+        return cls.persons[num] if num in cls.persons else None
     
 if __name__ == "__main__":
     print('__file__={0:<35} | __name__={1:<20} | __package__={2:<20}'.format(__file__,__name__,str(__package__)))

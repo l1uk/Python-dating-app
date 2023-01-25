@@ -1,5 +1,4 @@
 '''
-simple banking application
-class definitions for banking, object managing and persistent storage using pickle
+Simple match-making application, persistent storage is implemented using pickle
 '''
 

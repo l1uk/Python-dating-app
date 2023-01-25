@@ -1,4 +1,5 @@
 class Utils(object):
+    # simple method to collect an input between a given threshold
     @staticmethod
     def integerInput(min, max):
         choice = -1
