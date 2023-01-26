@@ -42,6 +42,12 @@ class Answer(object):
                 result.append(value)
         return result
     @staticmethod 
+    def deleteAnswersForPerson(personID):
+        '''delete all the answers for a given person'''
+        keys = Answer.getAnswersForPerson(personID)
+        for key in keys:
+            del Answer.answers[key.Id]
+    @staticmethod 
     def getTotalForPerson(personID):
         '''return the total value of all the questions for a given person'''
         result = 0

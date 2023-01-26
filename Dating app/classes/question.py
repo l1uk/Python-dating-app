@@ -1,6 +1,7 @@
 '''
 Question class, containing the text of the question itself and the possible answers 
 '''
+import random
 class Question(object):
     questions={}
     def __init__(self, text,answers=("1","2","3","4","5"), weight = 1, Id = None):
@@ -49,6 +50,13 @@ class Question(object):
         answers = []
         for key, value in Question.questions.items():
             answers.append(value.answer())
+        return answers
+    @staticmethod
+    def answerAllRandomly():
+        '''Answers all the questions randomly'''
+        answers = []
+        for key, value in Question.questions.items():
+            answers.append((key,random.choice(value.answers)))
         return answers
     @classmethod
     def getWeight(cls, num):

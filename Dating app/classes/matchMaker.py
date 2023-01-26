@@ -2,6 +2,7 @@
 from classes.question import Question
 from classes.person import Person
 from classes.answer import Answer
+import time
 
 class MatchMaker(object):
     '''Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. Note: M is matched with F and D is paired togheder. '''
@@ -9,7 +10,7 @@ class MatchMaker(object):
     @staticmethod
     def findBestMatch(person_id, exclude = None):
         '''Return the single best match for a given person, 
-     excluding the ones specified in the exclude list. '''
+     excluding the ones specified in the exclude list.'''
         answVal = Answer.getTotalForPerson(person_id)
         minDiff = None
         personID = -1
@@ -27,10 +28,12 @@ class MatchMaker(object):
     def matchAll():
         ''' Using the precedent method, match all the participant 
      returns a list of matches and a boolean 
-     indicating whether all the participans are matched or not. 
+     indicating whether all the participans are matched or not. During the pairing process a progress percent and time statistics is displayed.
      Note: the implemented algorithm starts by finding the best match for the first person and goes on. It is not granted to return the best possible pairing.'''
         matched = []
         matches = []
+        i = 0
+        t = time.time()
         for key, value in Person.persons.items():
             if key not in matched:
                 match = MatchMaker.findBestMatch(key, matched)
@@ -38,4 +41,8 @@ class MatchMaker(object):
                     matched.append(match)
                     matched.append(key)
                     matches.append((key, match))
+            if(i%100 == 0):
+                print("Progress: " + str((i/len(Person.persons))*100) + "%")
+                print("Elapsed time: " + str(round(time.time() - t,2)) + "s")
+            i = i+1
         return matches, len(matched) < len(Person.persons)

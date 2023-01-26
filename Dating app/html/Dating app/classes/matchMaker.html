@@ -31,6 +31,7 @@
 from classes.question import Question
 from classes.person import Person
 from classes.answer import Answer
+import time
 
 class MatchMaker(object):
     &#39;&#39;&#39;Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. Note: M is matched with F and D is paired togheder. &#39;&#39;&#39;
@@ -38,13 +39,14 @@ class MatchMaker(object):
     @staticmethod
     def findBestMatch(person_id, exclude = None):
         &#39;&#39;&#39;Return the single best match for a given person, 
-     excluding the ones specified in the exclude list. &#39;&#39;&#39;
+     excluding the ones specified in the exclude list.&#39;&#39;&#39;
         answVal = Answer.getTotalForPerson(person_id)
         minDiff = None
         personID = -1
         personGender = Person.get(person_id).getGender()
         for key, value in Person.persons.items():
-            if(key != person_id and ((value.getGender() != personGender) or (value.getGender() == personGender == &#34;D&#34;) ) and ((exclude != None and key not in exclude) or exclude == None)):
+            if(key != person_id and ((personGender != &#34;D&#34; and value.getGender() != personGender and value.getGender() != &#34;D&#34; )
+                or (value.getGender() == personGender and personGender == &#34;D&#34;) ) and ((exclude != None and key not in exclude) or exclude == None)):
                 diff = abs(answVal - Answer.getTotalForPerson(key))
                 if(minDiff == None or minDiff &gt; diff):
                     minDiff = diff
@@ -55,10 +57,12 @@ class MatchMaker(object):
     def matchAll():
         &#39;&#39;&#39; Using the precedent method, match all the participant 
      returns a list of matches and a boolean 
-     indicating whether all the participans are matched or not. 
+     indicating whether all the participans are matched or not. During the pairing process a progress percent and time statistics is displayed.
      Note: the implemented algorithm starts by finding the best match for the first person and goes on. It is not granted to return the best possible pairing.&#39;&#39;&#39;
         matched = []
         matches = []
+        i = 0
+        t = time.time()
         for key, value in Person.persons.items():
             if key not in matched:
                 match = MatchMaker.findBestMatch(key, matched)
@@ -66,6 +70,10 @@ class MatchMaker(object):
                     matched.append(match)
                     matched.append(key)
                     matches.append((key, match))
+            if(i%100 == 0):
+                print(&#34;Progress: &#34; + str((i/len(Person.persons))*100) + &#34;%&#34;)
+                print(&#34;Elapsed time: &#34; + str(round(time.time() - t,2)) + &#34;s&#34;)
+            i = i+1
         return matches, len(matched) &lt; len(Person.persons)</code></pre>
 </details>
 </section>
@@ -93,13 +101,14 @@ class MatchMaker(object):
     @staticmethod
     def findBestMatch(person_id, exclude = None):
         &#39;&#39;&#39;Return the single best match for a given person, 
-     excluding the ones specified in the exclude list. &#39;&#39;&#39;
+     excluding the ones specified in the exclude list.&#39;&#39;&#39;
         answVal = Answer.getTotalForPerson(person_id)
         minDiff = None
         personID = -1
         personGender = Person.get(person_id).getGender()
         for key, value in Person.persons.items():
-            if(key != person_id and ((value.getGender() != personGender) or (value.getGender() == personGender == &#34;D&#34;) ) and ((exclude != None and key not in exclude) or exclude == None)):
+            if(key != person_id and ((personGender != &#34;D&#34; and value.getGender() != personGender and value.getGender() != &#34;D&#34; )
+                or (value.getGender() == personGender and personGender == &#34;D&#34;) ) and ((exclude != None and key not in exclude) or exclude == None)):
                 diff = abs(answVal - Answer.getTotalForPerson(key))
                 if(minDiff == None or minDiff &gt; diff):
                     minDiff = diff
@@ -110,10 +119,12 @@ class MatchMaker(object):
     def matchAll():
         &#39;&#39;&#39; Using the precedent method, match all the participant 
      returns a list of matches and a boolean 
-     indicating whether all the participans are matched or not. 
+     indicating whether all the participans are matched or not. During the pairing process a progress percent and time statistics is displayed.
      Note: the implemented algorithm starts by finding the best match for the first person and goes on. It is not granted to return the best possible pairing.&#39;&#39;&#39;
         matched = []
         matches = []
+        i = 0
+        t = time.time()
         for key, value in Person.persons.items():
             if key not in matched:
                 match = MatchMaker.findBestMatch(key, matched)
@@ -121,6 +132,10 @@ class MatchMaker(object):
                     matched.append(match)
                     matched.append(key)
                     matches.append((key, match))
+            if(i%100 == 0):
+                print(&#34;Progress: &#34; + str((i/len(Person.persons))*100) + &#34;%&#34;)
+                print(&#34;Elapsed time: &#34; + str(round(time.time() - t,2)) + &#34;s&#34;)
+            i = i+1
         return matches, len(matched) &lt; len(Person.persons)</code></pre>
 </details>
 <h3>Static methods</h3>
@@ -138,13 +153,14 @@ excluding the ones specified in the exclude list.</p></div>
 <pre><code class="python">@staticmethod
 def findBestMatch(person_id, exclude = None):
     &#39;&#39;&#39;Return the single best match for a given person, 
- excluding the ones specified in the exclude list. &#39;&#39;&#39;
+ excluding the ones specified in the exclude list.&#39;&#39;&#39;
     answVal = Answer.getTotalForPerson(person_id)
     minDiff = None
     personID = -1
     personGender = Person.get(person_id).getGender()
     for key, value in Person.persons.items():
-        if(key != person_id and ((value.getGender() != personGender) or (value.getGender() == personGender == &#34;D&#34;) ) and ((exclude != None and key not in exclude) or exclude == None)):
+        if(key != person_id and ((personGender != &#34;D&#34; and value.getGender() != personGender and value.getGender() != &#34;D&#34; )
+            or (value.getGender() == personGender and personGender == &#34;D&#34;) ) and ((exclude != None and key not in exclude) or exclude == None)):
             diff = abs(answVal - Answer.getTotalForPerson(key))
             if(minDiff == None or minDiff &gt; diff):
                 minDiff = diff
@@ -158,7 +174,7 @@ def findBestMatch(person_id, exclude = None):
 <dd>
 <div class="desc"><p>Using the precedent method, match all the participant
 returns a list of matches and a boolean
-indicating whether all the participans are matched or not.
+indicating whether all the participans are matched or not. During the pairing process a progress percent and time statistics is displayed.
 Note: the implemented algorithm starts by finding the best match for the first person and goes on. It is not granted to return the best possible pairing.</p></div>
 <details class="source">
 <summary>
@@ -168,10 +184,12 @@ Note: the implemented algorithm starts by finding the best match for the first p
 def matchAll():
     &#39;&#39;&#39; Using the precedent method, match all the participant 
  returns a list of matches and a boolean 
- indicating whether all the participans are matched or not. 
+ indicating whether all the participans are matched or not. During the pairing process a progress percent and time statistics is displayed.
  Note: the implemented algorithm starts by finding the best match for the first person and goes on. It is not granted to return the best possible pairing.&#39;&#39;&#39;
     matched = []
     matches = []
+    i = 0
+    t = time.time()
     for key, value in Person.persons.items():
         if key not in matched:
             match = MatchMaker.findBestMatch(key, matched)
@@ -179,6 +197,10 @@ def matchAll():
                 matched.append(match)
                 matched.append(key)
                 matches.append((key, match))
+        if(i%100 == 0):
+            print(&#34;Progress: &#34; + str((i/len(Person.persons))*100) + &#34;%&#34;)
+            print(&#34;Elapsed time: &#34; + str(round(time.time() - t,2)) + &#34;s&#34;)
+        i = i+1
     return matches, len(matched) &lt; len(Person.persons)</code></pre>
 </details>
 </dd>

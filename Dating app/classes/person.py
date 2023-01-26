@@ -1,4 +1,6 @@
 '''Person class, contatining name and gender (M, F, D).'''
+import string
+import random
 class Person(object):
     persons={}
     genders = {"M" : "male", "F" : "female", "D" : "diverse"}
@@ -21,7 +23,7 @@ class Person(object):
         '''
         str() to string method 
         '''
-        return f"{self.Id}: {self.name}, {self.gender }"
+        return f"{self.Id}: {self.name}, {self.gender}"
      
     @staticmethod
     def createNewPerson():
@@ -30,6 +32,19 @@ class Person(object):
         gender = "l"
         while gender not in Person.genders:
             gender = str(input("please insert gender: "))
+        Id = Person.getNextID()
+        Person(name,gender, Id)
+        return Id
+
+    @staticmethod
+    def createNewRandomPerson(nameLength):
+        '''Generates new person data and saves it'''
+        name = ''.join(
+            random.choice(string.ascii_lowercase) for _ in range(nameLength)
+        )
+        gender = ''.join(
+            random.choice("MFD") for _ in range(1)
+        )
         Id = Person.getNextID()
         Person(name,gender, Id)
         return Id

@@ -71,6 +71,12 @@ class Answer(object):
                 result.append(value)
         return result
     @staticmethod 
+    def deleteAnswersForPerson(personID):
+        &#39;&#39;&#39;delete all the answers for a given person&#39;&#39;&#39;
+        keys = Answer.getAnswersForPerson(personID)
+        for key in keys:
+            del Answer.answers[key.Id]
+    @staticmethod 
     def getTotalForPerson(personID):
         &#39;&#39;&#39;return the total value of all the questions for a given person&#39;&#39;&#39;
         result = 0
@@ -147,6 +153,12 @@ and the answer Id is generated in case the parameter is not supplied, otherwise 
                 result.append(value)
         return result
     @staticmethod 
+    def deleteAnswersForPerson(personID):
+        &#39;&#39;&#39;delete all the answers for a given person&#39;&#39;&#39;
+        keys = Answer.getAnswersForPerson(personID)
+        for key in keys:
+            del Answer.answers[key.Id]
+    @staticmethod 
     def getTotalForPerson(personID):
         &#39;&#39;&#39;return the total value of all the questions for a given person&#39;&#39;&#39;
         result = 0
@@ -182,6 +194,23 @@ def createAnswerForPerson(answers, personID):
  create and store Answers objects&#39;&#39;&#39;
     for ans in answers:
         Answer(ans[1],personID,ans[0])</code></pre>
+</details>
+</dd>
+<dt id="Dating app.classes.answer.Answer.deleteAnswersForPerson"><code class="name flex">
+<span>def <span class="ident">deleteAnswersForPerson</span></span>(<span>personID)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>delete all the answers for a given person</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod 
+def deleteAnswersForPerson(personID):
+    &#39;&#39;&#39;delete all the answers for a given person&#39;&#39;&#39;
+    keys = Answer.getAnswersForPerson(personID)
+    for key in keys:
+        del Answer.answers[key.Id]</code></pre>
 </details>
 </dd>
 <dt id="Dating app.classes.answer.Answer.getAnswersForPerson"><code class="name flex">
@@ -262,6 +291,7 @@ def getTotalForPerson(personID):
 <ul class="">
 <li><code><a title="Dating app.classes.answer.Answer.answers" href="#Dating app.classes.answer.Answer.answers">answers</a></code></li>
 <li><code><a title="Dating app.classes.answer.Answer.createAnswerForPerson" href="#Dating app.classes.answer.Answer.createAnswerForPerson">createAnswerForPerson</a></code></li>
+<li><code><a title="Dating app.classes.answer.Answer.deleteAnswersForPerson" href="#Dating app.classes.answer.Answer.deleteAnswersForPerson">deleteAnswersForPerson</a></code></li>
 <li><code><a title="Dating app.classes.answer.Answer.getAnswersForPerson" href="#Dating app.classes.answer.Answer.getAnswersForPerson">getAnswersForPerson</a></code></li>
 <li><code><a title="Dating app.classes.answer.Answer.getTotalForPerson" href="#Dating app.classes.answer.Answer.getTotalForPerson">getTotalForPerson</a></code></li>
 <li><code><a title="Dating app.classes.answer.Answer.getValue" href="#Dating app.classes.answer.Answer.getValue">getValue</a></code></li>

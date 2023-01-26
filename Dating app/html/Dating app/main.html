@@ -98,6 +98,7 @@ if __name__ == &#34;__main__&#34;:
                     Person.printPersons()
                     choice = Utils.integerInput(0,len(Person.persons)-1)
                     answers = Question.answerAll()
+                    Answer.deleteAnswersForPerson(choice)
                     Answer.createAnswerForPerson(answers,choice)  
                 else: 
                     print(&#34;### No participants! ###&#34;) 

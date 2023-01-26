@@ -28,6 +28,8 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">&#39;&#39;&#39;Person class, contatining name and gender (M, F, D).&#39;&#39;&#39;
+import string
+import random
 class Person(object):
     persons={}
     genders = {&#34;M&#34; : &#34;male&#34;, &#34;F&#34; : &#34;female&#34;, &#34;D&#34; : &#34;diverse&#34;}
@@ -50,7 +52,7 @@ class Person(object):
         &#39;&#39;&#39;
         str() to string method 
         &#39;&#39;&#39;
-        return f&#34;{self.Id}: {self.name}, {self.gender }&#34;
+        return f&#34;{self.Id}: {self.name}, {self.gender}&#34;
      
     @staticmethod
     def createNewPerson():
@@ -59,6 +61,19 @@ class Person(object):
         gender = &#34;l&#34;
         while gender not in Person.genders:
             gender = str(input(&#34;please insert gender: &#34;))
+        Id = Person.getNextID()
+        Person(name,gender, Id)
+        return Id
+
+    @staticmethod
+    def createNewRandomPerson(nameLength):
+        &#39;&#39;&#39;Generates new person data and saves it&#39;&#39;&#39;
+        name = &#39;&#39;.join(
+            random.choice(string.ascii_lowercase) for _ in range(nameLength)
+        )
+        gender = &#39;&#39;.join(
+            random.choice(&#34;MFD&#34;) for _ in range(1)
+        )
         Id = Person.getNextID()
         Person(name,gender, Id)
         return Id
@@ -134,7 +149,7 @@ if __name__ == &#34;__main__&#34;:
         &#39;&#39;&#39;
         str() to string method 
         &#39;&#39;&#39;
-        return f&#34;{self.Id}: {self.name}, {self.gender }&#34;
+        return f&#34;{self.Id}: {self.name}, {self.gender}&#34;
      
     @staticmethod
     def createNewPerson():
@@ -143,6 +158,19 @@ if __name__ == &#34;__main__&#34;:
         gender = &#34;l&#34;
         while gender not in Person.genders:
             gender = str(input(&#34;please insert gender: &#34;))
+        Id = Person.getNextID()
+        Person(name,gender, Id)
+        return Id
+
+    @staticmethod
+    def createNewRandomPerson(nameLength):
+        &#39;&#39;&#39;Generates new person data and saves it&#39;&#39;&#39;
+        name = &#39;&#39;.join(
+            random.choice(string.ascii_lowercase) for _ in range(nameLength)
+        )
+        gender = &#39;&#39;.join(
+            random.choice(&#34;MFD&#34;) for _ in range(1)
+        )
         Id = Person.getNextID()
         Person(name,gender, Id)
         return Id
@@ -201,6 +229,29 @@ def createNewPerson():
     gender = &#34;l&#34;
     while gender not in Person.genders:
         gender = str(input(&#34;please insert gender: &#34;))
+    Id = Person.getNextID()
+    Person(name,gender, Id)
+    return Id</code></pre>
+</details>
+</dd>
+<dt id="Dating app.classes.person.Person.createNewRandomPerson"><code class="name flex">
+<span>def <span class="ident">createNewRandomPerson</span></span>(<span>nameLength)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates new person data and saves it</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def createNewRandomPerson(nameLength):
+    &#39;&#39;&#39;Generates new person data and saves it&#39;&#39;&#39;
+    name = &#39;&#39;.join(
+        random.choice(string.ascii_lowercase) for _ in range(nameLength)
+    )
+    gender = &#39;&#39;.join(
+        random.choice(&#34;MFD&#34;) for _ in range(1)
+    )
     Id = Person.getNextID()
     Person(name,gender, Id)
     return Id</code></pre>
@@ -307,8 +358,9 @@ def printPersons():
 <ul>
 <li>
 <h4><code><a title="Dating app.classes.person.Person" href="#Dating app.classes.person.Person">Person</a></code></h4>
-<ul class="two-column">
+<ul class="">
 <li><code><a title="Dating app.classes.person.Person.createNewPerson" href="#Dating app.classes.person.Person.createNewPerson">createNewPerson</a></code></li>
+<li><code><a title="Dating app.classes.person.Person.createNewRandomPerson" href="#Dating app.classes.person.Person.createNewRandomPerson">createNewRandomPerson</a></code></li>
 <li><code><a title="Dating app.classes.person.Person.genders" href="#Dating app.classes.person.Person.genders">genders</a></code></li>
 <li><code><a title="Dating app.classes.person.Person.get" href="#Dating app.classes.person.Person.get">get</a></code></li>
 <li><code><a title="Dating app.classes.person.Person.getGender" href="#Dating app.classes.person.Person.getGender">getGender</a></code></li>

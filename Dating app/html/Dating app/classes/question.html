@@ -30,6 +30,7 @@
 <pre><code class="python">&#39;&#39;&#39;
 Question class, containing the text of the question itself and the possible answers 
 &#39;&#39;&#39;
+import random
 class Question(object):
     questions={}
     def __init__(self, text,answers=(&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;), weight = 1, Id = None):
@@ -78,6 +79,13 @@ class Question(object):
         answers = []
         for key, value in Question.questions.items():
             answers.append(value.answer())
+        return answers
+    @staticmethod
+    def answerAllRandomly():
+        &#39;&#39;&#39;Answers all the questions randomly&#39;&#39;&#39;
+        answers = []
+        for key, value in Question.questions.items():
+            answers.append((key,random.choice(value.answers)))
         return answers
     @classmethod
     def getWeight(cls, num):
@@ -161,6 +169,13 @@ the weight parameter allows the developer to assign more or less importancy to t
         for key, value in Question.questions.items():
             answers.append(value.answer())
         return answers
+    @staticmethod
+    def answerAllRandomly():
+        &#39;&#39;&#39;Answers all the questions randomly&#39;&#39;&#39;
+        answers = []
+        for key, value in Question.questions.items():
+            answers.append((key,random.choice(value.answers)))
+        return answers
     @classmethod
     def getWeight(cls, num):
         &#39;&#39;&#39;Returns the weight associated to the provided question ID&#39;&#39;&#39;
@@ -194,6 +209,24 @@ def answerAll():
     answers = []
     for key, value in Question.questions.items():
         answers.append(value.answer())
+    return answers</code></pre>
+</details>
+</dd>
+<dt id="Dating app.classes.question.Question.answerAllRandomly"><code class="name flex">
+<span>def <span class="ident">answerAllRandomly</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Answers all the questions randomly</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def answerAllRandomly():
+    &#39;&#39;&#39;Answers all the questions randomly&#39;&#39;&#39;
+    answers = []
+    for key, value in Question.questions.items():
+        answers.append((key,random.choice(value.answers)))
     return answers</code></pre>
 </details>
 </dd>
@@ -271,9 +304,10 @@ def getWeight(cls, num):
 <ul>
 <li>
 <h4><code><a title="Dating app.classes.question.Question" href="#Dating app.classes.question.Question">Question</a></code></h4>
-<ul class="">
+<ul class="two-column">
 <li><code><a title="Dating app.classes.question.Question.answer" href="#Dating app.classes.question.Question.answer">answer</a></code></li>
 <li><code><a title="Dating app.classes.question.Question.answerAll" href="#Dating app.classes.question.Question.answerAll">answerAll</a></code></li>
+<li><code><a title="Dating app.classes.question.Question.answerAllRandomly" href="#Dating app.classes.question.Question.answerAllRandomly">answerAllRandomly</a></code></li>
 <li><code><a title="Dating app.classes.question.Question.get" href="#Dating app.classes.question.Question.get">get</a></code></li>
 <li><code><a title="Dating app.classes.question.Question.getWeight" href="#Dating app.classes.question.Question.getWeight">getWeight</a></code></li>
 <li><code><a title="Dating app.classes.question.Question.questions" href="#Dating app.classes.question.Question.questions">questions</a></code></li>
