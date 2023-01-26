@@ -1,3 +1,4 @@
+'''Create n random persons with random answers to the questionnaire. Implemented for testing purposes.'''
 from classes.question import Question
 from classes.person import Person
 from classes.answer import Answer
