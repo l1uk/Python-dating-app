@@ -26,7 +26,7 @@ def load():
         pass
 
 def createQuestions(): 
-    ''' reset old questions and define new questions '''
+    '''Questions are defined here. The questions dict is empyted and repopulated.'''
     Question.questions={}
     Question("Would you consider your values to be traditional or progressive?")
 

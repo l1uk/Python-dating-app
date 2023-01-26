@@ -27,13 +27,13 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#39;&#39;&#39;Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. &#39;&#39;&#39;
+<pre><code class="python">&#39;&#39;&#39;Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder.  &#39;&#39;&#39;
 from classes.question import Question
 from classes.person import Person
 from classes.answer import Answer
 
 class MatchMaker(object):
-    &#39;&#39;&#39;Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. &#39;&#39;&#39;
+    &#39;&#39;&#39;Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. Note: M is matched with F and D is paired togheder. &#39;&#39;&#39;
 
     @staticmethod
     def findBestMatch(person_id, exclude = None):
@@ -44,7 +44,7 @@ class MatchMaker(object):
         personID = -1
         personGender = Person.get(person_id).getGender()
         for key, value in Person.persons.items():
-            if(key != person_id and value.getGender() != personGender and ((exclude != None and key not in exclude) or exclude == None)):
+            if(key != person_id and ((value.getGender() != personGender) or (value.getGender() == personGender == &#34;D&#34;) ) and ((exclude != None and key not in exclude) or exclude == None)):
                 diff = abs(answVal - Answer.getTotalForPerson(key))
                 if(minDiff == None or minDiff &gt; diff):
                     minDiff = diff
@@ -82,13 +82,13 @@ class MatchMaker(object):
 <span>class <span class="ident">MatchMaker</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder.</p></div>
+<div class="desc"><p>Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. Note: M is matched with F and D is paired togheder.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class MatchMaker(object):
-    &#39;&#39;&#39;Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. &#39;&#39;&#39;
+    &#39;&#39;&#39;Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. Note: M is matched with F and D is paired togheder. &#39;&#39;&#39;
 
     @staticmethod
     def findBestMatch(person_id, exclude = None):
@@ -99,7 +99,7 @@ class MatchMaker(object):
         personID = -1
         personGender = Person.get(person_id).getGender()
         for key, value in Person.persons.items():
-            if(key != person_id and value.getGender() != personGender and ((exclude != None and key not in exclude) or exclude == None)):
+            if(key != person_id and ((value.getGender() != personGender) or (value.getGender() == personGender == &#34;D&#34;) ) and ((exclude != None and key not in exclude) or exclude == None)):
                 diff = abs(answVal - Answer.getTotalForPerson(key))
                 if(minDiff == None or minDiff &gt; diff):
                     minDiff = diff
@@ -144,7 +144,7 @@ def findBestMatch(person_id, exclude = None):
     personID = -1
     personGender = Person.get(person_id).getGender()
     for key, value in Person.persons.items():
-        if(key != person_id and value.getGender() != personGender and ((exclude != None and key not in exclude) or exclude == None)):
+        if(key != person_id and ((value.getGender() != personGender) or (value.getGender() == personGender == &#34;D&#34;) ) and ((exclude != None and key not in exclude) or exclude == None)):
             diff = abs(answVal - Answer.getTotalForPerson(key))
             if(minDiff == None or minDiff &gt; diff):
                 minDiff = diff

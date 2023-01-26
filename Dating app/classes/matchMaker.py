@@ -1,10 +1,10 @@
-'''Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. '''
+'''Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder.  '''
 from classes.question import Question
 from classes.person import Person
 from classes.answer import Answer
 
 class MatchMaker(object):
-    '''Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. '''
+    '''Class related to the matchmaking feature, allowing either to match every participant individually or to pair all the participant togheder. Note: M is matched with F and D is paired togheder. '''
 
     @staticmethod
     def findBestMatch(person_id, exclude = None):
@@ -15,7 +15,8 @@ class MatchMaker(object):
         personID = -1
         personGender = Person.get(person_id).getGender()
         for key, value in Person.persons.items():
-            if(key != person_id and value.getGender() != personGender and ((exclude != None and key not in exclude) or exclude == None)):
+            if(key != person_id and ((personGender != "D" and value.getGender() != personGender and value.getGender() != "D" )
+                or (value.getGender() == personGender and personGender == "D") ) and ((exclude != None and key not in exclude) or exclude == None)):
                 diff = abs(answVal - Answer.getTotalForPerson(key))
                 if(minDiff == None or minDiff > diff):
                     minDiff = diff
